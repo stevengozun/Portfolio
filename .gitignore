@@ -7,6 +7,9 @@ SKILL.md
 .env.local
 .env.*
 
+# Local config (contains API keys — see config.example.js)
+config.js
+
 # OS files
 .DS_Store
 Thumbs.db

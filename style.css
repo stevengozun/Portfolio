@@ -820,6 +820,19 @@ img { max-width: 100%; display: block; }
 }
 .form-success.show { display: block; }
 
+.form-error {
+  display: none;
+  margin-top: 0.75rem;
+  padding: 1rem;
+  background: rgba(248,113,113,0.1);
+  border: 1px solid rgba(248,113,113,0.35);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  color: #fca5a5;
+  text-align: center;
+}
+.form-error.show { display: block; }
+
 /* ============================================
    FOOTER
    ============================================ */
