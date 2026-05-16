@@ -138,6 +138,7 @@
     .frame {
       position: relative;
       width: 100%;
+      margin: 0 auto;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 14px;
@@ -326,7 +327,10 @@
         if (loader) loader.style.display = 'none';
       });
 
-      // Scale every .frame so its stage fits the rendered width.
+      // Scale every .frame so its stage fits the rendered width,
+      // but cap the display so portrait designs don't overflow the viewport
+      // on desktop. Mobile parent widths are smaller than the cap, so it
+      // doesn't constrain there.
       function relayout() {
         document.querySelectorAll('.frame').forEach((frame) => {
           const w = parseFloat(frame.dataset.w);
@@ -334,20 +338,32 @@
           if (!w || !h) return;
           const stage = frame.querySelector('.frame__stage');
           if (!stage) return;
-          const containerW = frame.clientWidth;
-          const scale = containerW / w;
+          // Read width from the parent so writing frame.style.width
+          // below doesn't feed back into the next layout pass.
+          const parent = frame.parentElement;
+          const availW = parent ? parent.clientWidth : frame.clientWidth;
+          const maxW = Math.min(availW, 760);
+          const maxH = window.innerHeight * 0.85;
+          const scale = Math.min(maxW / w, maxH / h);
           stage.style.width = w + 'px';
           stage.style.height = h + 'px';
           stage.style.transform = 'scale(' + scale + ')';
+          frame.style.width = (w * scale) + 'px';
           frame.style.height = (h * scale) + 'px';
         });
       }
       relayout();
       window.addEventListener('resize', relayout);
     }
-    // After Babel transpiles the JSX scripts, they're appended via standard
-    // <script> behaviour — give them a tick to execute, then mount.
-    window.addEventListener('load', () => setTimeout(mountAll, 80));
+    // Babel-standalone transpiles this inline block *after* DOMContentLoaded
+    // and often after `load` has already fired — so registering a `load`
+    // listener here is too late and never runs. Kick mountAll() off directly
+    // and only fall back to the load event if the document is still loading.
+    if (document.readyState === 'complete') {
+      setTimeout(mountAll, 0);
+    } else {
+      window.addEventListener('load', () => setTimeout(mountAll, 80));
+    }
   </script>
 
 </body>

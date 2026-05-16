@@ -1,1 +1,23 @@
-.claude/settings.local.json
+# Claude Code
+.claude/
+SKILL.md
+
+# Environment files
+.env
+.env.local
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# Dependencies (if you add npm packages later)
+node_modules/
+
+# Logs
+*.log
