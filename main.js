@@ -343,21 +343,50 @@ new IntersectionObserver((entries) => {
 
 
 /* ============================================================
-   CONTACT FORM
+   CONTACT FORM — Web3Forms
+   The access key lives in `config.js` (gitignored, see config.example.js).
    ============================================================ */
-function handleSubmit(e) {
+const WEB3FORMS_ACCESS_KEY = window.WEB3FORMS_ACCESS_KEY || '';
+
+async function handleSubmit(e) {
   e.preventDefault();
-  const btn     = e.target.querySelector('button[type="submit"]');
+  const form    = e.target;
+  const btn     = form.querySelector('button[type="submit"]');
   const success = document.getElementById('formSuccess');
+  const error   = document.getElementById('formError');
+
+  success.classList.remove('show');
+  error.classList.remove('show');
   btn.textContent = 'Sending…';
   btn.disabled    = true;
-  setTimeout(() => {
+
+  const data = new FormData(form);
+  data.append('access_key', WEB3FORMS_ACCESS_KEY);
+  data.append('from_name', 'Portfolio Contact Form');
+  data.append('subject', data.get('subject') || `New message from ${data.get('name')}`);
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: data,
+    });
+    const json = await res.json();
+    if (json.success) {
+      form.reset();
+      success.classList.add('show');
+      setTimeout(() => success.classList.remove('show'), 5000);
+    } else {
+      throw new Error(json.message || 'Submission failed');
+    }
+  } catch (err) {
+    console.error('Contact form error:', err);
+    error.classList.add('show');
+    setTimeout(() => error.classList.remove('show'), 6000);
+  } finally {
     btn.textContent = 'Send Message →';
     btn.disabled    = false;
-    e.target.reset();
-    success.classList.add('show');
-    setTimeout(() => success.classList.remove('show'), 4000);
-  }, 1200);
+  }
 }
 
 
