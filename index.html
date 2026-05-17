@@ -9,8 +9,27 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,500;1,500&family=Playfair+Display:ital,wght@1,500&family=Bodoni+Moda:wght@400&family=Anton&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script>
+    // Decide before render whether the intro should play this session
+    (function () {
+      try {
+        var seen = sessionStorage.getItem('introSeen');
+        var rm   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!seen && !rm) document.documentElement.classList.add('show-intro');
+      } catch (e) { /* sessionStorage blocked — skip intro */ }
+    })();
+  </script>
 </head>
 <body>
+
+  <!-- INTRO OVERLAY -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro__inner">
+      <span class="intro__logo">RG<span class="intro__dot">.</span></span>
+      <span class="intro__divider"></span>
+      <span class="intro__name" id="introName"></span>
+    </div>
+  </div>
 
   <!-- SCROLL PROGRESS BAR -->
   <div class="scroll-progress" id="scrollProgress"></div>
