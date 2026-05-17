@@ -1748,3 +1748,177 @@ img { max-width: 100%; display: block; }
   .tools-marquee--right { animation-duration: 40s; }
   .tools-glow { width: 320px; height: 320px; filter: blur(90px); }
 }
+
+/* ============================================
+   INTRO OVERLAY — first-visit logo + name reveal
+   ============================================ */
+.intro { display: none; }
+
+.show-intro .intro {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.show-intro .intro::before,
+.show-intro .intro::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+.show-intro .intro::before {
+  width: 420px; height: 420px;
+  background: var(--accent2);
+  top: 18%; left: 22%;
+  animation: introBlob 4s ease-in-out infinite alternate;
+}
+.show-intro .intro::after {
+  width: 360px; height: 360px;
+  background: var(--accent3);
+  bottom: 16%; right: 20%;
+  animation: introBlob 5s ease-in-out 0.5s infinite alternate-reverse;
+}
+
+@keyframes introBlob {
+  to { transform: translate(40px, -20px) scale(1.08); }
+}
+
+.intro__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  padding: 0 1.5rem;
+}
+
+/* Logo "RG." — mirrors the nav logo but bigger and centered */
+.intro__logo {
+  font-family: var(--font);
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: #fff;
+  line-height: 1;
+  opacity: 0;
+  transform: scale(0.6);
+  animation: introLogoIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+}
+.intro__dot {
+  color: var(--accent);
+  display: inline-block;
+  transform-origin: bottom left;
+  animation: introDotPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.85s backwards;
+}
+
+@keyframes introLogoIn {
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes introDotPop {
+  0%   { transform: scale(0); }
+  60%  { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+/* Vertical divider that grows between logo and name */
+.intro__divider {
+  width: 1px;
+  height: clamp(2.5rem, 7vw, 4.5rem);
+  background: linear-gradient(180deg, transparent, var(--accent), transparent);
+  transform: scaleY(0);
+  transform-origin: center;
+  animation: introDivider 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.95s forwards;
+}
+
+@keyframes introDivider {
+  to { transform: scaleY(1); }
+}
+
+/* Name — types out character by character */
+.intro__name {
+  font-family: var(--font);
+  font-size: clamp(1.5rem, 5vw, 2.75rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  background: linear-gradient(135deg, var(--accent), var(--accent3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  white-space: pre;
+  opacity: 0;
+  transform: translateX(-12px);
+  animation: introNameIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 1.15s forwards;
+}
+
+@keyframes introNameIn {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.intro.intro--out {
+  animation: introFadeOut 0.7s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes introFadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+
+/* Lock scroll & hide hero contents while intro is on-screen */
+.show-intro body { overflow: hidden; }
+
+.show-intro .hero__eyebrow,
+.show-intro .hero__title .line,
+.show-intro .hero__sub,
+.show-intro .hero__cta,
+.show-intro .hero__stats,
+.show-intro .hero__visual,
+.show-intro .nav {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.show-intro .nav { transform: translateY(-100%); }
+
+/* Once intro is done, stagger the hero in */
+.intro-done .nav,
+.intro-done .hero__eyebrow,
+.intro-done .hero__title .line,
+.intro-done .hero__sub,
+.intro-done .hero__cta,
+.intro-done .hero__stats,
+.intro-done .hero__visual {
+  animation: heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.intro-done .nav                            { animation-delay: 0.00s; }
+.intro-done .hero__eyebrow                  { animation-delay: 0.10s; }
+.intro-done .hero__title .line:nth-child(1) { animation-delay: 0.20s; }
+.intro-done .hero__title .line:nth-child(2) { animation-delay: 0.30s; }
+.intro-done .hero__title .line:nth-child(3) { animation-delay: 0.42s; }
+.intro-done .hero__sub                      { animation-delay: 0.55s; }
+.intro-done .hero__cta                      { animation-delay: 0.68s; }
+.intro-done .hero__stats                    { animation-delay: 0.80s; }
+.intro-done .hero__visual                   { animation-delay: 0.35s; }
+
+@keyframes heroRise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro,
+  .show-intro .intro { display: none !important; }
+  .show-intro .hero__eyebrow,
+  .show-intro .hero__title .line,
+  .show-intro .hero__sub,
+  .show-intro .hero__cta,
+  .show-intro .hero__stats,
+  .show-intro .hero__visual,
+  .show-intro .nav { opacity: 1; transform: none; }
+}

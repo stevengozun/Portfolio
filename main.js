@@ -1,4 +1,43 @@
 /* ============================================================
+   INTRO OVERLAY — first-visit logo + name reveal
+   ============================================================ */
+(function () {
+  const html   = document.documentElement;
+  const intro  = document.getElementById('intro');
+  const nameEl = document.getElementById('introName');
+  const show   = html.classList.contains('show-intro');
+
+  function finish() {
+    document.body.classList.add('intro-done');
+    document.dispatchEvent(new CustomEvent('intro:done'));
+  }
+
+  if (!show || !intro || !nameEl) {
+    // No intro this load — fire the event on the next tick so listeners can register
+    setTimeout(finish, 0);
+    return;
+  }
+
+  nameEl.textContent = 'Roi Gozun';
+
+  // CSS choreographs the reveal (~1.65s). Hold a beat, then fade the overlay out.
+  const REVEAL_MS = 1700;
+  const HOLD_MS   = 750;
+  const FADE_MS   = 700;
+
+  setTimeout(() => {
+    intro.classList.add('intro--out');
+    setTimeout(() => {
+      intro.remove();
+      html.classList.remove('show-intro');
+      try { sessionStorage.setItem('introSeen', '1'); } catch (e) {}
+      finish();
+    }, FADE_MS);
+  }, REVEAL_MS + HOLD_MS);
+})();
+
+
+/* ============================================================
    PARTICLE NETWORK — hero canvas
    ============================================================ */
 (function () {
@@ -155,7 +194,13 @@
     setTimeout(tick, delay);
   }
 
-  setTimeout(tick, 900); // initial pause before first word types
+  // Wait for the intro to finish before the role typewriter starts.
+  // (When there's no intro, the intro module fires `intro:done` immediately.)
+  if (document.documentElement.classList.contains('show-intro')) {
+    document.addEventListener('intro:done', () => setTimeout(tick, 350), { once: true });
+  } else {
+    setTimeout(tick, 900);
+  }
 })();
 
 
