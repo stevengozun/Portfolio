@@ -151,7 +151,11 @@ img { max-width: 100%; display: block; }
   font-weight: 700;
   color: #fff;
   margin-right: auto;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity var(--transition);
 }
+.nav__logo:hover { opacity: 0.75; }
 .nav__links {
   display: flex;
   list-style: none;
