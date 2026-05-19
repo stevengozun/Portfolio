@@ -24,3 +24,6 @@ node_modules/
 
 # Logs
 *.log
+
+# Private project sources (kept local; not pushed to GitHub)
+projects/Kairos/
