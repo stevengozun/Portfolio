@@ -310,17 +310,22 @@ img { max-width: 100%; display: block; }
 .stat__divider { width: 1px; height: 40px; background: var(--border); }
 
 /* HERO VISUAL */
-/* ===== Hero full-bleed background video ===== */
+/* ===== Hero background video — right side, edges feathered ===== */
 .hero__video {
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
-  height: 100%;
+  bottom: 0;
+  /* bleed the right edge out to the viewport edge regardless of
+     the centred, max-width hero */
+  right: calc((100% - 100vw) / 2);
+  width: min(580px, 52vw);
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
+  /* feather the inner (left) edge so the video dissolves into the
+     page instead of showing a hard panel edge / corners */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 40%, #000 100%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 40%, #000 100%);
 }
 
 /* Two identical layers crossfaded so the loop seam never hard-cuts */
@@ -343,21 +348,21 @@ img { max-width: 100%; display: block; }
   50%      { transform: scale(1.07); filter: brightness(1.07) saturate(1.08); }
 }
 
-/* Darkening overlay — keeps hero text readable on top of the video */
+/* Darkening overlay — settles the video into the page, keeps the
+   feathered inner edge dark so it blends with the background */
 .hero__video-overlay {
   position: absolute;
   inset: 0;
   background:
     linear-gradient(90deg,
-      rgba(10,10,15,0.95) 0%,
-      rgba(10,10,15,0.82) 38%,
-      rgba(10,10,15,0.60) 72%,
-      rgba(10,10,15,0.52) 100%),
+      rgba(10,10,15,0.92) 0%,
+      rgba(10,10,15,0.34) 46%,
+      rgba(10,10,15,0.14) 100%),
     linear-gradient(180deg,
-      rgba(10,10,15,0.85) 0%,
-      rgba(10,10,15,0.25) 26%,
-      rgba(10,10,15,0.25) 60%,
-      rgba(10,10,15,0.97) 100%);
+      rgba(10,10,15,0.62) 0%,
+      transparent 20%,
+      transparent 66%,
+      rgba(10,10,15,0.94) 100%);
 }
 
 .scroll-hint {
@@ -1385,12 +1390,17 @@ img { max-width: 100%; display: block; }
   .nav { padding: 1rem 1.5rem; gap: 1rem; }
   .nav.scrolled { padding: 0.85rem 1.5rem; }
   .hero { padding: 7rem 1.5rem 3rem; gap: 2.5rem; }
-  /* Hero text is centred on small screens — even out the overlay */
+  /* Stacked layout: video becomes a full-width backdrop again */
+  .hero__video {
+    width: 100vw;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
   .hero__video-overlay {
     background: linear-gradient(180deg,
-      rgba(10,10,15,0.88) 0%,
-      rgba(10,10,15,0.64) 32%,
-      rgba(10,10,15,0.64) 60%,
+      rgba(10,10,15,0.90) 0%,
+      rgba(10,10,15,0.68) 30%,
+      rgba(10,10,15,0.68) 58%,
       rgba(10,10,15,0.97) 100%);
   }
   .section { padding: 5rem 0; }
