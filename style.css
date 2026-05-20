@@ -315,17 +315,19 @@ img { max-width: 100%; display: block; }
   position: absolute;
   top: 0;
   bottom: 0;
+  /* inner edge lines up with the old avatar slot:
+     hero padding (2.5rem) + content width (640px) + the 4rem gap */
+  left: calc(640px + 6.5rem);
   /* bleed the right edge out to the viewport edge regardless of
      the centred, max-width hero */
   right: calc((100% - 100vw) / 2);
-  width: min(580px, 52vw);
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
   /* feather the inner (left) edge so the video dissolves into the
      page instead of showing a hard panel edge / corners */
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 40%, #000 100%);
-          mask-image: linear-gradient(90deg, transparent 0%, #000 40%, #000 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 110px, #000 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 110px, #000 100%);
 }
 
 /* Two identical layers crossfaded so the loop seam never hard-cuts */
@@ -1158,6 +1160,20 @@ img { max-width: 100%; display: block; }
 @media (max-width: 1024px) {
   .hero { flex-direction: column; text-align: center; min-height: auto; padding-top: 7rem; }
   .hero__content { max-width: 100%; }
+  /* Stacked layout: video becomes a full-width backdrop again */
+  .hero__video {
+    left: 0;
+    right: 0;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+  .hero__video-overlay {
+    background: linear-gradient(180deg,
+      rgba(10,10,15,0.90) 0%,
+      rgba(10,10,15,0.68) 30%,
+      rgba(10,10,15,0.68) 58%,
+      rgba(10,10,15,0.97) 100%);
+  }
   .hero__sub { max-width: 100%; margin-left: auto; margin-right: auto; }
   .hero__cta { justify-content: center; }
   .hero__stats { justify-content: center; }
@@ -1390,19 +1406,6 @@ img { max-width: 100%; display: block; }
   .nav { padding: 1rem 1.5rem; gap: 1rem; }
   .nav.scrolled { padding: 0.85rem 1.5rem; }
   .hero { padding: 7rem 1.5rem 3rem; gap: 2.5rem; }
-  /* Stacked layout: video becomes a full-width backdrop again */
-  .hero__video {
-    width: 100vw;
-    -webkit-mask-image: none;
-            mask-image: none;
-  }
-  .hero__video-overlay {
-    background: linear-gradient(180deg,
-      rgba(10,10,15,0.90) 0%,
-      rgba(10,10,15,0.68) 30%,
-      rgba(10,10,15,0.68) 58%,
-      rgba(10,10,15,0.97) 100%);
-  }
   .section { padding: 5rem 0; }
   .container { padding: 0 1.5rem; }
   .about__grid { gap: 2.5rem; }
