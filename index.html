@@ -75,6 +75,15 @@
 
   <!-- HERO -->
   <section class="hero" id="home">
+    <div class="hero__video" aria-hidden="true">
+      <video class="hero__video-layer is-active" id="heroVidA"
+             src="assets/video-hero.mp4" muted playsinline autoplay loop
+             preload="auto" disablepictureinpicture></video>
+      <video class="hero__video-layer" id="heroVidB"
+             src="assets/video-hero.mp4" muted playsinline loop
+             preload="auto" disablepictureinpicture></video>
+      <div class="hero__video-overlay"></div>
+    </div>
     <canvas id="heroCanvas" class="hero__canvas"></canvas>
     <div class="hero__bg">
       <div class="blob blob--1"></div>
@@ -99,23 +108,6 @@
         <div class="stat"><span class="stat__num" data-count="50" data-suffix="+">50+</span><span class="stat__label">Daily Analyses</span></div>
         <div class="stat__divider"></div>
         <div class="stat"><span class="stat__num">∞</span><span class="stat__label">Attention to Detail</span></div>
-      </div>
-    </div>
-    <div class="hero__visual">
-      <div class="hero-video" id="heroVideo">
-        <div class="hero-video__aura" aria-hidden="true"></div>
-        <div class="hero-video__frame">
-          <video class="hero-video__layer is-active" id="heroVidA"
-                 src="assets/hero-video.mp4" muted playsinline autoplay loop
-                 preload="auto" disablepictureinpicture aria-hidden="true"></video>
-          <video class="hero-video__layer" id="heroVidB"
-                 src="assets/hero-video.mp4" muted playsinline loop
-                 preload="auto" disablepictureinpicture aria-hidden="true"></video>
-          <div class="hero-video__sheen" aria-hidden="true"></div>
-        </div>
-        <div class="floating-tag tag--1">HTML / CSS</div>
-        <div class="floating-tag tag--2">Figma</div>
-        <div class="floating-tag tag--3">Operations</div>
       </div>
     </div>
   </section>
