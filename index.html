@@ -102,17 +102,16 @@
       </div>
     </div>
     <div class="hero__visual">
-      <div class="avatar-wrap">
-        <div class="avatar-ring"></div>
-        <div class="avatar-ring avatar-ring--2"></div>
-        <div class="avatar">
-          <div class="avatar__bg" aria-hidden="true"></div>
-          <div class="avatar__grid" aria-hidden="true"></div>
-          <div class="avatar__glow"></div>
-          <img src="assets/Photo.png" alt="Roi Steven Gozun" class="avatar__photo" onerror="this.style.opacity=0" />
-          <span class="avatar__spark sp--a" aria-hidden="true"></span>
-          <span class="avatar__spark sp--b" aria-hidden="true"></span>
-          <span class="avatar__spark sp--c" aria-hidden="true"></span>
+      <div class="hero-video" id="heroVideo">
+        <div class="hero-video__aura" aria-hidden="true"></div>
+        <div class="hero-video__frame">
+          <video class="hero-video__layer is-active" id="heroVidA"
+                 src="assets/hero-video.mp4" muted playsinline autoplay loop
+                 preload="auto" disablepictureinpicture aria-hidden="true"></video>
+          <video class="hero-video__layer" id="heroVidB"
+                 src="assets/hero-video.mp4" muted playsinline loop
+                 preload="auto" disablepictureinpicture aria-hidden="true"></video>
+          <div class="hero-video__sheen" aria-hidden="true"></div>
         </div>
         <div class="floating-tag tag--1">HTML / CSS</div>
         <div class="floating-tag tag--2">Figma</div>
