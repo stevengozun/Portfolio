@@ -446,3 +446,71 @@ if (heroSection) {
     heroSection.style.setProperty('--my', `${e.clientY - rect.top}px`);
   });
 }
+
+
+/* ============================================================
+   HERO VIDEO — seamless crossfade loop
+   Two stacked layers of the same clip. Just before the active
+   one ends, we restart the other from frame 0 and crossfade to
+   it, so the loop point dissolves instead of hard-cutting.
+   ============================================================ */
+(function () {
+  const vids = [
+    document.getElementById('heroVidA'),
+    document.getElementById('heroVidB'),
+  ];
+  if (!vids[0] || !vids[1]) return;
+
+  const FADE = 0.9;          // crossfade length (seconds) — matches CSS transition
+  let active = 0;            // index of the currently visible layer
+  let swapping = false;
+
+  vids.forEach((v) => { v.muted = true; v.playsInline = true; });
+
+  const play = (v) => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+
+  // Reduced motion: skip the crossfade, just plain-loop one layer
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    vids[1].classList.remove('is-active');
+    vids[0].classList.add('is-active');
+    play(vids[0]);
+    return;
+  }
+
+  function swap() {
+    if (swapping) return;
+    swapping = true;
+    const cur  = vids[active];
+    const next = vids[1 - active];
+
+    next.currentTime = 0;
+    play(next);
+    next.classList.add('is-active');
+    cur.classList.remove('is-active');
+    active = 1 - active;
+
+    // Park the outgoing layer once it has fully faded out
+    window.setTimeout(() => {
+      cur.pause();
+      try { cur.currentTime = 0; } catch (e) {}
+      swapping = false;
+    }, FADE * 1000);
+  }
+
+  function tick() {
+    const cur = vids[active];
+    const d = cur.duration;
+    if (!swapping && d && isFinite(d) && cur.currentTime >= d - FADE) {
+      swap();
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // Recover playback if the tab was backgrounded
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) play(vids[active]);
+  });
+
+  play(vids[0]);
+  requestAnimationFrame(tick);
+})();
