@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Billy Francis Couture — Case Study · Roi Steven Gozun</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FAF8F5;
+      --bg-card: #F2F0EC;
+      --bg-subtle: #EDE9E3;
+      --border: rgba(0,0,0,0.09);
+      --text: #1a1814;
+      --body: #7a7875;
+      --muted: #aaa;
+      --accent: #b8924a;
+      --accent-dim: rgba(184,146,74,0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      padding-top: 64px;
+    }
+
+    /* —— NAV —— */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      background: rgba(250,248,245,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-back {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--text); }
+
+    .nav-back::before { content: '←'; }
+
+    /* —— HERO —— */
+    .hero {
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem 2.5rem 3rem;
+      margin-top: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 40%, rgba(184,146,74,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(0,0,0,0.02) 0%, transparent 60%);
+    }
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 2rem;
+      height: 1px;
+      background: var(--accent);
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 2rem;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--body);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.75rem;
+      border-radius: 2px;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .stat-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hero-divider {
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* —— LAYOUT —— */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+    section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    section:last-child { border-bottom: none; }
+
+    /* —— SECTION HEADERS —— */
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 1.75rem;
+    }
+    h2 em { font-style: italic; color: var(--accent); }
+    h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    p {
+      color: var(--body);
+      margin-bottom: 1rem;
+      font-size: 0.975rem;
+    }
+    p:last-child { margin-bottom: 0; }
+
+    /* —— BRIEF BLOCK —— */
+    .brief-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 2.5rem;
+    }
+    .brief-cell {
+      background: var(--bg-card);
+      padding: 1.75rem;
+    }
+    .brief-cell-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .brief-cell-value {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    /* —— CHALLENGE CARDS —— */
+    .challenge-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      margin-top: 2rem;
+    }
+    .challenge-item {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 1.25rem;
+      align-items: start;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .challenge-item:not(:last-child) {
+      border-bottom: none;
+    }
+    .challenge-item:hover { border-color: rgba(184,146,74,0.3); }
+    .challenge-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--accent);
+      padding-top: 0.2rem;
+    }
+
+    /* —— DEEP DIVE —— */
+    .deep-dive {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--accent);
+      padding: 2rem 2.25rem;
+      margin-top: 2rem;
+    }
+    .deep-dive-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    code {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      background: rgba(0,0,0,0.06);
+      padding: 0.15em 0.45em;
+      border-radius: 2px;
+      color: var(--accent);
+    }
+
+    /* —— FEATURES GRID —— */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      padding: 1.75rem;
+    }
+    .feature-icon {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* —— RESULT CALLOUT —— */
+    .result-callout {
+      background: var(--accent-dim);
+      border: 1px solid rgba(184,146,74,0.25);
+      padding: 2.5rem;
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .result-callout p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.5;
+      margin: 0;
+    }
+    .result-callout p em { color: var(--accent); font-style: normal; }
+
+    /* —— OUTCOME STATS —— */
+    .outcome-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+    .outcome-stat {
+      background: var(--bg-card);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .outcome-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .outcome-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* —— FOOTER —— */
+    .case-footer {
+      padding: 4rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .visit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--accent);
+      padding: 0.85rem 2rem;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .visit-btn:hover { opacity: 0.85; }
+    .footer-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.25rem; }
+      .hero { padding: 0 1.25rem 4rem; }
+      .container { padding: 0 1.25rem; }
+      .brief-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .outcome-stats { grid-template-columns: 1fr; }
+      h1 { font-size: clamp(2.75rem, 12vw, 5rem); }
+      .hero-stats { gap: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">RG.</a>
+    <a href="index.html#projects" class="nav-back">All Work</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div style="position:relative; z-index:1;">
+      <p class="hero-eyebrow">Case Study · E-Commerce</p>
+      <h1>Billy Francis<br><em>Couture</em></h1>
+      <div class="hero-meta">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">Real Client</span>
+        <span class="tag">E-Commerce</span>
+        <span class="tag">Philippines</span>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-value">&lt;7</span>
+          <span class="stat-label">Days to ship</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">22</span>
+          <span class="stat-label">Products</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">5</span>
+          <span class="stat-label">Categories</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">0</span>
+          <span class="stat-label">Frameworks used</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-divider"></div>
+  </div>
+
+  <!-- BRIEF -->
+  <div class="container">
+    <section>
+      <p class="section-label">01 — The Brief</p>
+      <h2>A small Manila workshop<br>needed a <em>real storefront</em></h2>
+      <p>Billy Francis Couture is a Philippine handcraft brand specialising in handmade veils, silk scarves, and considered accessories, sewn one by one in a small Manila atelier. They had products, real customers, and a distinct identity — but no web presence that matched the quality of their work.</p>
+      <p>The ask: a premium e-commerce site that felt like a boutique, not a template. Built fast. Built to sell.</p>
+
+      <div class="brief-grid">
+        <div class="brief-cell">
+          <p class="brief-cell-label">Client</p>
+          <p class="brief-cell-value">Billy Francis Couture, Manila PH</p>
+        </div>
+        <div class="brief-cell">
+          <p class="brief-cell-label">Deliverable</p>
+          <p class="brief-cell-value">Full e-commerce frontend, live &amp; transactable</p>
+        </div>
+        <div class="brief-cell">
+          <p class="brief-cell-label">Timeline</p>
+          <p class="brief-cell-value">Under one week, start to deployment</p>
+        </div>
+        <div class="brief-cell">
+          <p class="brief-cell-label">Stack</p>
+          <p class="brief-cell-value">Vanilla HTML, CSS, JavaScript — no frameworks</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHALLENGE -->
+    <section>
+      <p class="section-label">02 — The Challenge</p>
+      <h2>Everything a real store needs,<br><em>nothing it doesn't</em></h2>
+      <p>The client's market is the Philippines — which means COD, GCash, and Maya aren't optional extras, they're the primary payment expectation. The UI had to handle that reality while still feeling elevated enough to justify a premium price point alongside a ₱99 veil.</p>
+
+      <div class="challenge-list">
+        <div class="challenge-item">
+          <span class="challenge-num">01</span>
+          <div>
+            <h3>No framework, full functionality</h3>
+            <p>The project was built entirely in vanilla HTML, CSS, and JavaScript. No React, no Shopify, no template engine. Every interaction — cart, filters, search, hover states — written from scratch, which means it loads fast and has no dependency overhead.</p>
+          </div>
+        </div>
+        <div class="challenge-item">
+          <span class="challenge-num">02</span>
+          <div>
+            <h3>22 products across 5 categories</h3>
+            <p>Veils, scarves, accessories, dolls, and lifestyle goods — each with different price points, badge states, and colour variants. The catalogue needed to be browsable without a backend or database powering it.</p>
+          </div>
+        </div>
+        <div class="challenge-item">
+          <span class="challenge-num">03</span>
+          <div>
+            <h3>Premium aesthetic on a tight timeline</h3>
+            <p>The brand identity — editorial, warm, handcrafted luxury — had to come through in the design without the luxury of weeks of iteration. Every typographic and layout decision had to be right the first time.</p>
+          </div>
+        </div>
+        <div class="challenge-item">
+          <span class="challenge-num">04</span>
+          <div>
+            <h3>Philippine market requirements</h3>
+            <p>COD, GCash, Maya, and BancNet are not afterthoughts in the PH market — they're expected. The checkout and shipping sections had to address these clearly, alongside free-shipping threshold logic and a returns promise that built buyer confidence.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPROACH -->
+    <section>
+      <p class="section-label">03 — The Hard Part</p>
+      <h2>Building the filter system<br><em>without a framework</em></h2>
+      <p>The product filter was the most technically demanding piece. With five categories plus an "All" view, the system needed to reflow 22 product cards gracefully on click — without a virtual DOM, without React state, and without the grid jumping or flashing during transition.</p>
+      <p>The solution: each product card carries a <code>data-category</code> attribute. On filter click, the script reads those attributes, toggles a <code>.hidden</code> class, and uses a CSS transition on <code>opacity</code> and <code>transform</code> so the grid fades cards out before the layout reflows. The active filter state persists across the URL via a query parameter — meaning a direct link to <code>/shop?cat=Veils</code> lands with the correct filter already applied, no JavaScript redirect required.</p>
+
+      <div class="deep-dive">
+        <p class="deep-dive-label">Technical decision</p>
+        <p>Persisting filter state in the URL (<code>?cat=Veils</code>) instead of JavaScript state was a deliberate choice. It means every filtered view is a shareable, bookmarkable link — useful for a brand that sells through WhatsApp and Instagram DMs, where a client might ask "can you send me the veil link?"</p>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section>
+      <p class="section-label">04 — What Was Built</p>
+      <h2>Every detail <em>by hand</em></h2>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Live search</h3>
+          <p>Filters products as you type, matching against product name and category. Zero latency — runs entirely in the browser.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">◐</div>
+          <h3>Category filters</h3>
+          <p>URL-persisted filter state. Works across all 5 categories with smooth CSS transitions on show/hide.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">◇</div>
+          <h3>Working cart</h3>
+          <p>Add, remove, update quantity, running total — all in vanilla JS. Persists across page navigation within the session.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">◈</div>
+          <h3>Hover image swap</h3>
+          <p>Each product card switches to a lifestyle/detail shot on hover — a premium fashion site convention, implemented in pure CSS.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">▭</div>
+          <h3>Fully responsive</h3>
+          <p>Designed mobile-first. The grid, navigation, and cart all reflow cleanly from 320px to wide desktop.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">◉</div>
+          <h3>SEO-ready metadata</h3>
+          <p>Open Graph tags, Twitter card, and structured meta — so product pages preview correctly when shared on social.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULT -->
+    <section>
+      <p class="section-label">05 — The Result</p>
+      <h2>Live in under a week,<br><em>serving real customers</em></h2>
+      <p>The site launched in under seven days and is actively used by Billy Francis Couture to sell to customers across the Philippines. It handles real transactions, real product enquiries, and real repeat buyers — not a demo, not a concept.</p>
+      <p>The no-framework approach keeps the site fast and maintenance-simple. No build pipeline to break, no dependency updates to manage, no platform fees. The client owns it outright.</p>
+
+      <div class="result-callout">
+        <p>"An e-commerce frontend that looks like a <em>premium boutique</em>, loads like a static file, and was live before the week was out."</p>
+      </div>
+
+      <div class="outcome-stats">
+        <div class="outcome-stat">
+          <div class="outcome-value">&lt;7</div>
+          <div class="outcome-label">Days from brief to live</div>
+        </div>
+        <div class="outcome-stat">
+          <div class="outcome-value">79+</div>
+          <div class="outcome-label">Units sold through the site</div>
+        </div>
+        <div class="outcome-stat">
+          <div class="outcome-value">5.0</div>
+          <div class="outcome-label">Customer rating</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="case-footer">
+      <a href="https://billy-francis-couture.steven-gozun.workers.dev/" target="_blank" rel="noopener" class="visit-btn">
+        Visit the Live Site →
+      </a>
+      <p class="footer-note">Built by Roi Steven Gozun · HTML · CSS · JavaScript</p>
+    </div>
+  </div>
+
+</body>
+</html>
