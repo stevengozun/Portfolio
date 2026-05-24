@@ -1508,16 +1508,15 @@ img { max-width: 100%; display: block; }
   align-items: center;
   justify-content: center;
   font-family: var(--font);
-  font-weight: 700;
-  font-size: 0.95rem;
+  font-weight: 600;
+  font-size: 1rem;
   color: #fff;
-  background: linear-gradient(180deg,
-    rgba(10,10,15,0) 0%,
-    rgba(10,10,15,0.15) 50%,
-    rgba(124,58,237,0.55) 100%);
+  background: rgba(10, 10, 15, 0.55);
+  backdrop-filter: blur(2px);
   opacity: 0;
-  transition: opacity var(--transition);
+  transition: opacity 0.25s ease;
   letter-spacing: 0.04em;
+  pointer-events: none;
 }
 .project-card:hover .project-thumb__overlay {
   opacity: 1;
