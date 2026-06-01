@@ -157,6 +157,23 @@
       background: var(--surface);
     }
 
+    /* IMAGE-BASED SAMPLES — embedded raster artwork */
+    .frame--img { padding: 0; }
+    .frame--img img {
+      display: block; width: 100%; height: auto;
+    }
+    /* Two posters presented together as a single campaign piece */
+    .frame--duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+    }
+    .frame--duo img { width: 100%; height: 100%; object-fit: cover; }
+    @media (max-width: 560px) {
+      .frame--duo { grid-template-columns: 1fr; }
+    }
+
     /* FOOTER */
     .footer {
       border-top: 1px solid var(--border);
@@ -195,10 +212,62 @@
 
   <main class="samples">
 
+    <article class="sample" id="valor-web">
+      <div class="sample__meta">
+        <div>
+          <h2 class="sample__title"><span class="sample__num">01</span>Valor — Web Hero</h2>
+          <p class="sample__sub">Smart fitness watch landing page — cinematic dark UI, gold accent, product spotlight</p>
+        </div>
+        <div class="sample__tags">
+          <span class="sample__tag">Web Hero</span>
+          <span class="sample__tag">E-commerce</span>
+          <span class="sample__tag">UI Design</span>
+        </div>
+      </div>
+      <div class="frame frame--img">
+        <img src="assets/valor-web.png" alt="Valor smart fitness watch landing page — Designed to Move hero with product render and collection grid" loading="lazy" />
+      </div>
+    </article>
+
+    <article class="sample" id="valor-product-sheet">
+      <div class="sample__meta">
+        <div>
+          <h2 class="sample__title"><span class="sample__num">02</span>Valor — Product Sheet</h2>
+          <p class="sample__sub">"Built for Greatness" feature one-sheet — spec callouts, multi-angle renders, lime accent</p>
+        </div>
+        <div class="sample__tags">
+          <span class="sample__tag">Product</span>
+          <span class="sample__tag">Layout</span>
+          <span class="sample__tag">Branding</span>
+        </div>
+      </div>
+      <div class="frame frame--img">
+        <img src="assets/valor-product-sheet.png" alt="Valor Built for Greatness product feature sheet with watch renders, material details and spec callouts" loading="lazy" />
+      </div>
+    </article>
+
+    <article class="sample" id="valor-campaign">
+      <div class="sample__meta">
+        <div>
+          <h2 class="sample__title"><span class="sample__num">03</span>Valor — Campaign Posters</h2>
+          <p class="sample__sub">"Designed to Move" poster pair — bold condensed display, athlete imagery, one campaign system</p>
+        </div>
+        <div class="sample__tags">
+          <span class="sample__tag">Poster</span>
+          <span class="sample__tag">Campaign</span>
+          <span class="sample__tag">Advertising</span>
+        </div>
+      </div>
+      <div class="frame frame--img frame--duo">
+        <img src="assets/valor-poster-1.png" alt="Valor Designed to Move campaign poster — athlete portrait against sky" loading="lazy" />
+        <img src="assets/valor-poster-2.png" alt="Valor Designed to Move campaign poster — athlete sprinting against city skyline" loading="lazy" />
+      </div>
+    </article>
+
     <article class="sample" id="brew-and-bean">
       <div class="sample__meta">
         <div>
-          <h2 class="sample__title"><span class="sample__num">01</span>Brew &amp; Bean Co.</h2>
+          <h2 class="sample__title"><span class="sample__num">04</span>Brew &amp; Bean Co.</h2>
           <p class="sample__sub">Warm artisanal coffee poster — display serif + monospace stamps</p>
         </div>
         <div class="sample__tags">
@@ -216,7 +285,7 @@
     <article class="sample" id="lumine-botanicals">
       <div class="sample__meta">
         <div>
-          <h2 class="sample__title"><span class="sample__num">02</span>Luminé Botanicals</h2>
+          <h2 class="sample__title"><span class="sample__num">05</span>Luminé Botanicals</h2>
           <p class="sample__sub">Elegant skincare ad — high-contrast serif + soft pastels</p>
         </div>
         <div class="sample__tags">
@@ -234,7 +303,7 @@
     <article class="sample" id="pulsefit">
       <div class="sample__meta">
         <div>
-          <h2 class="sample__title"><span class="sample__num">03</span>PulseFit</h2>
+          <h2 class="sample__title"><span class="sample__num">06</span>PulseFit</h2>
           <p class="sample__sub">High-energy fitness app promo — heavy condensed display + electric accent</p>
         </div>
         <div class="sample__tags">
@@ -252,7 +321,7 @@
     <article class="sample" id="fennel-and-flame">
       <div class="sample__meta">
         <div>
-          <h2 class="sample__title"><span class="sample__num">04</span>Fennel &amp; Flame</h2>
+          <h2 class="sample__title"><span class="sample__num">07</span>Fennel &amp; Flame</h2>
           <p class="sample__sub">Restaurant tasting menu flyer — didone + burgundy editorial</p>
         </div>
         <div class="sample__tags">
@@ -264,24 +333,6 @@
       <div class="frame" data-w="720" data-h="1080">
         <div class="frame__loading">Loading…</div>
         <div class="frame__stage" id="stage-4"></div>
-      </div>
-    </article>
-
-    <article class="sample" id="stackly">
-      <div class="sample__meta">
-        <div>
-          <h2 class="sample__title"><span class="sample__num">05</span>Stackly</h2>
-          <p class="sample__sub">SaaS hero — layered UI mock, gradient typography, indigo system</p>
-        </div>
-        <div class="sample__tags">
-          <span class="sample__tag">Web Hero</span>
-          <span class="sample__tag">SaaS</span>
-          <span class="sample__tag">UI Design</span>
-        </div>
-      </div>
-      <div class="frame" data-w="1440" data-h="900">
-        <div class="frame__loading">Loading…</div>
-        <div class="frame__stage" id="stage-5"></div>
       </div>
     </article>
 
@@ -300,7 +351,6 @@
   <script type="text/babel" data-presets="react" src="samples/02-lumine-botanicals.jsx"></script>
   <script type="text/babel" data-presets="react" src="samples/03-pulsefit.jsx"></script>
   <script type="text/babel" data-presets="react" src="samples/04-fennel-and-flame.jsx"></script>
-  <script type="text/babel" data-presets="react" src="samples/05-stackly.jsx"></script>
 
   <script type="text/babel" data-presets="react">
     // Wait for all babel-transformed scripts to actually execute (they're async),
@@ -311,7 +361,6 @@
         ['stage-2', window.LumineBotanicals],
         ['stage-3', window.PulseFit],
         ['stage-4', window.FennelAndFlame],
-        ['stage-5', window.Stackly],
       ];
       // Some components may not be ready yet if Babel hasn't finished — retry briefly.
       let pending = mounts.filter(([, C]) => !C).length;
