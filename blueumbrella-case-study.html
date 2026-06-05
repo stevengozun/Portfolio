@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlueUmbrella Leads — Case Study · Roi Steven Gozun</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FAF8F5;
+      --bg-card: #F2F0EC;
+      --bg-subtle: #EDE9E3;
+      --border: rgba(0,0,0,0.09);
+      --text: #1a1814;
+      --body: #7a7875;
+      --muted: #aaa;
+      --accent: #2f4fe8;
+      --accent-dim: rgba(47,79,232,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-weight: 300;
+      line-height: 1.7; -webkit-font-smoothing: antialiased; padding-top: 64px;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 2.5rem; background: rgba(250,248,245,0.88);
+      backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600;
+      color: var(--text); text-decoration: none; letter-spacing: 0.04em; }
+    .nav-back { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted);
+      text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase;
+      display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s; }
+    .nav-back:hover { color: var(--text); }
+    .nav-back::before { content: '←'; }
+
+    /* HERO */
+    .hero { display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 1.5rem 2.5rem 3rem; position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 40%, rgba(47,79,232,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(0,0,0,0.02) 0%, transparent 60%); }
+    .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: 0.75rem; }
+    .hero-eyebrow::before { content: ''; display: inline-block; width: 2rem; height: 1px; background: var(--accent); }
+    h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 9vw, 8rem); font-weight: 300;
+      line-height: 0.95; letter-spacing: -0.01em; color: var(--text); margin-bottom: 2rem; }
+    h1 em { font-style: italic; color: var(--accent); }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+    .tag { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--body); border: 1px solid var(--border);
+      padding: 0.35rem 0.75rem; border-radius: 2px; }
+    .hero-stats { display: flex; gap: 3rem; flex-wrap: wrap; }
+    .stat-item { display: flex; flex-direction: column; gap: 0.25rem; }
+    .stat-value { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; color: var(--text); line-height: 1; }
+    .stat-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+    .hero-divider { position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--border); }
+
+    /* LAYOUT */
+    .container { max-width: 860px; margin: 0 auto; padding: 0 2.5rem; }
+    section { padding: 5rem 0; border-bottom: 1px solid var(--border); }
+    section:last-child { border-bottom: none; }
+
+    .shot { margin-top: 3rem; border: 1px solid var(--border); background: var(--bg-card); line-height: 0; }
+    .shot img { width: 100%; display: block; }
+
+    .section-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.75rem; }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 300;
+      line-height: 1.15; color: var(--text); margin-bottom: 1.75rem; }
+    h2 em { font-style: italic; color: var(--accent); }
+    h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: var(--text); margin-bottom: 0.6rem; }
+    p { color: var(--body); margin-bottom: 1rem; font-size: 0.975rem; }
+    p:last-child { margin-bottom: 0; }
+
+    .brief-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border);
+      border: 1px solid var(--border); margin-top: 2.5rem; }
+    .brief-cell { background: var(--bg-card); padding: 1.75rem; }
+    .brief-cell-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 0.6rem; }
+    .brief-cell-value { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--text); }
+
+    .challenge-list { display: flex; flex-direction: column; gap: 1px; margin-top: 2rem; }
+    .challenge-item { display: grid; grid-template-columns: 2.5rem 1fr; gap: 1.25rem; align-items: start;
+      background: var(--bg-card); border: 1px solid var(--border); padding: 1.5rem; transition: border-color 0.2s; }
+    .challenge-item:not(:last-child) { border-bottom: none; }
+    .challenge-item:hover { border-color: rgba(47,79,232,0.3); }
+    .challenge-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--accent); padding-top: 0.2rem; }
+
+    .deep-dive { background: var(--bg-subtle); border: 1px solid var(--border); border-left: 2px solid var(--accent);
+      padding: 2rem 2.25rem; margin-top: 2rem; }
+    .deep-dive-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    code { font-family: 'DM Mono', monospace; font-size: 0.78rem; background: rgba(0,0,0,0.06);
+      padding: 0.15em 0.45em; border-radius: 2px; color: var(--accent); }
+
+    .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border);
+      border: 1px solid var(--border); margin-top: 2rem; }
+    .feature-card { background: var(--bg-card); padding: 1.75rem; }
+    .feature-icon { font-size: 1.1rem; margin-bottom: 0.75rem; }
+
+    .result-callout { background: var(--accent-dim); border: 1px solid rgba(47,79,232,0.25);
+      padding: 2.5rem; margin-top: 2rem; text-align: center; }
+    .result-callout p { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-style: italic;
+      color: var(--text); line-height: 1.5; margin: 0; }
+    .result-callout p em { color: var(--accent); font-style: normal; }
+
+    .outcome-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border);
+      border: 1px solid var(--border); margin-top: 2rem; }
+    .outcome-stat { background: var(--bg-card); padding: 2rem 1.5rem; text-align: center; }
+    .outcome-value { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300;
+      color: var(--accent); line-height: 1; margin-bottom: 0.5rem; }
+    .outcome-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted); }
+
+    .case-footer { padding: 4rem 0; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; text-align: center; }
+    .visit-btn { display: inline-flex; align-items: center; gap: 0.6rem; font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; background: var(--accent);
+      padding: 0.85rem 2rem; text-decoration: none; transition: opacity 0.2s; }
+    .visit-btn:hover { opacity: 0.85; }
+    .footer-note { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.25rem; }
+      .hero { padding: 0 1.25rem 4rem; }
+      .container { padding: 0 1.25rem; }
+      .brief-grid, .features-grid, .outcome-stats { grid-template-columns: 1fr; }
+      h1 { font-size: clamp(2.75rem, 12vw, 5rem); }
+      .hero-stats { gap: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">RG.</a>
+    <a href="index.html#projects" class="nav-back">All Work</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div style="position:relative; z-index:1;">
+      <p class="hero-eyebrow">Case Study · Lead-Gen Funnel</p>
+      <h1>BlueUmbrella<br><em>Leads</em></h1>
+      <div class="hero-meta">
+        <span class="tag">React</span>
+        <span class="tag">Vite</span>
+        <span class="tag">GoHighLevel</span>
+        <span class="tag">Cloudflare Workers</span>
+        <span class="tag">Booking API</span>
+        <span class="tag">Real Client</span>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><span class="stat-value">Live</span><span class="stat-label">Calendar availability</span></div>
+        <div class="stat-item"><span class="stat-value">100%</span><span class="stat-label">Synced to GoHighLevel</span></div>
+        <div class="stat-item"><span class="stat-value">1-click</span><span class="stat-label">To confirmed call</span></div>
+        <div class="stat-item"><span class="stat-value">0</span><span class="stat-label">Leads lost</span></div>
+      </div>
+    </div>
+    <div class="hero-divider"></div>
+  </div>
+
+  <!-- BODY -->
+  <div class="container">
+
+    <figure class="shot">
+      <img src="assets/blueumbrella-preview.png" alt="BlueUmbrella Leads — live site" />
+    </figure>
+
+    <!-- BRIEF -->
+    <section>
+      <p class="section-label">01 — The Brief</p>
+      <h2>A pay-per-call business that<br>lives inside <em>GoHighLevel</em></h2>
+      <p>BlueUmbrella sells <strong>exclusive inbound debt-settlement calls</strong>. Debtors call in from ad campaigns, get pre-screened, and qualified calls transfer live to debt-settlement companies who pay per call.</p>
+      <p>The ask: a public-facing platform to <em>sign those companies as clients</em> — a premium landing page whose entire job is to get an operator to book an intro call, with every booking flowing straight into the client's GoHighLevel CRM. Not a contact form. A booking engine.</p>
+
+      <div class="brief-grid">
+        <div class="brief-cell"><p class="brief-cell-label">Client</p><p class="brief-cell-value">BlueUmbrella Leads — United States</p></div>
+        <div class="brief-cell"><p class="brief-cell-label">Deliverable</p><p class="brief-cell-value">Landing page + GoHighLevel booking integration, live</p></div>
+        <div class="brief-cell"><p class="brief-cell-label">Scope</p><p class="brief-cell-value">Design · Front-end · API · Launch</p></div>
+        <div class="brief-cell"><p class="brief-cell-label">Stack</p><p class="brief-cell-value">React · Vite · Cloudflare Workers · GoHighLevel API</p></div>
+      </div>
+    </section>
+
+    <!-- CHALLENGE -->
+    <section>
+      <p class="section-label">02 — The Challenge</p>
+      <h2>Premium look, zero-friction<br>booking, <em>one CRM</em></h2>
+      <p>The page had to feel like a high-end agency product to win trust from business owners — and capture bookings with no friction. Crucially, the client runs their whole operation in <strong>GoHighLevel</strong>: contacts, calendars, pipelines, and ad attribution all live there.</p>
+
+      <div class="challenge-list">
+        <div class="challenge-item"><span class="challenge-num">01</span><div>
+          <h3>Premium trust in seconds</h3>
+          <p>Operators judge fast. The site needed a cinematic, high-end feel — motion, depth, and a bespoke booking experience — not a templated funnel look.</p></div></div>
+        <div class="challenge-item"><span class="challenge-num">02</span><div>
+          <h3>Real calendar availability</h3>
+          <p>Visitors should only ever see truly-open times, pulled live from the GoHighLevel calendar — not a vague "morning / afternoon" window that creates back-and-forth.</p></div></div>
+        <div class="challenge-item"><span class="challenge-num">03</span><div>
+          <h3>GoHighLevel as the single backend</h3>
+          <p>Every lead had to land as a <strong>contact and a confirmed appointment</strong> in GoHighLevel automatically, so the sales team could work it the moment it came in.</p></div></div>
+        <div class="challenge-item"><span class="challenge-num">04</span><div>
+          <h3>Ads-ready attribution</h3>
+          <p>Paid traffic needed Meta + Google pixels and UTM / click-ID capture, so every booking could be traced back to the campaign that produced it.</p></div></div>
+      </div>
+    </section>
+
+    <!-- HARD PART -->
+    <section>
+      <p class="section-label">03 — The Hard Part</p>
+      <h2>Booking a real GoHighLevel slot<br>from a <em>custom front end</em></h2>
+      <p>The technically demanding piece was making a bespoke, on-brand booking widget actually transact against GoHighLevel — instead of dropping in GoHighLevel's generic calendar embed. A private API token can't live in the browser, and the calendar's <em>real</em> availability has to drive what a visitor can pick.</p>
+      <p>The solution: a <strong>Cloudflare Worker</strong> sits between the site and GoHighLevel. The picker calls the Worker for live <code>free-slots</code> so only open times render; on submit, the Worker <strong>upserts the contact and books a confirmed appointment</strong> through the GoHighLevel API — resolving the visitor's timezone to the exact slot (DST-safe) and re-validating availability to prevent double-bookings.</p>
+
+      <div class="deep-dive">
+        <p class="deep-dive-label">Technical decision</p>
+        <p>Keeping the GoHighLevel token server-side in the Worker (never in the browser) let the custom UI stay pixel-perfect while booking real appointments securely. CORS is locked to the site's own origins, and the chosen slot's exact ISO time is sent through — so what the visitor sees is exactly what lands on the calendar.</p>
+      </div>
+    </section>
+
+    <!-- WHAT WAS BUILT -->
+    <section>
+      <p class="section-label">04 — What Was Built</p>
+      <h2>Designed, built &amp; <em>wired in</em></h2>
+      <div class="features-grid">
+        <div class="feature-card"><div class="feature-icon">✨</div><h3>Polished motion &amp; UI</h3><p>Scroll-reveal animation and a brand gradient hero, performance-tuned and fully responsive down to mobile.</p></div>
+        <div class="feature-card"><div class="feature-icon">📅</div><h3>Live-availability picker</h3><p>A two-step date/time picker that fetches real open slots from GoHighLevel — no double-bookings, no dead ends.</p></div>
+        <div class="feature-card"><div class="feature-icon">🔗</div><h3>GoHighLevel booking</h3><p>A Cloudflare Worker upserts the contact and books a confirmed calendar appointment via the GoHighLevel API on every submit.</p></div>
+        <div class="feature-card"><div class="feature-icon">⚙️</div><h3>Pipeline + automation</h3><p>Each lead drops into a GoHighLevel pipeline stage and triggers follow-up SMS / email workflows automatically.</p></div>
+        <div class="feature-card"><div class="feature-icon">🚀</div><h3>Full launch</h3><p>Deployed on Cloudflare with a custom domain and SSL, plus a GoHighLevel funnel rebuild for in-platform editing.</p></div>
+        <div class="feature-card"><div class="feature-icon">📈</div><h3>Ads-ready tracking</h3><p>Meta + Google pixels and UTM / click-ID capture, so paid campaigns can attribute every booking to source.</p></div>
+      </div>
+    </section>
+
+    <!-- RESULT -->
+    <section>
+      <p class="section-label">05 — The Result</p>
+      <h2>A funnel that <em>feeds the CRM</em></h2>
+      <p>A polished, conversion-focused funnel where every booking becomes a GoHighLevel contact, a confirmed appointment, and a pipeline opportunity — with paid-traffic attribution ready to go. The client manages the whole pipeline from one place.</p>
+
+      <div class="result-callout">
+        <p>"A bespoke booking experience that looks like a <em>premium agency site</em> — and books real appointments straight into GoHighLevel."</p>
+      </div>
+
+      <div class="outcome-stats">
+        <div class="outcome-stat"><div class="outcome-value">100%</div><div class="outcome-label">Bookings synced to GoHighLevel</div></div>
+        <div class="outcome-stat"><div class="outcome-value">Live</div><div class="outcome-label">Real-time availability, no double-bookings</div></div>
+        <div class="outcome-stat"><div class="outcome-value">1-Click</div><div class="outcome-label">Landing page to confirmed call</div></div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="case-footer">
+      <a href="https://blueumbrellaleads.com" target="_blank" rel="noopener" class="visit-btn">Visit the Live Site →</a>
+      <p class="footer-note">Built by Roi Steven Gozun · React · GoHighLevel · Cloudflare</p>
+    </div>
+  </div>
+
+</body>
+</html>
